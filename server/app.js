@@ -1,9 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const initializeDb = require('./utils/database');
 const path = require('path');
 const apiRoutes = require('./api');
 
 const app = express();
+initializeDb();
 
 app.use(cors({
     origin: [

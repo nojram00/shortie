@@ -1,0 +1,31 @@
+{
+  "name": "shortie-link-shortener",
+  "version": "1.0.0",
+  "description": "A full-stack web application built with React (frontend) and Express.js (backend).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:fe": "cd fe && npm install",
+    "install:srv" : "cd server && npm install",
+    "install:all": "concurrently \"npm run install:fe\" \"npm run install:srv\"",
+    "dev:fe": "cd fe && npm run dev",
+    "dev:srv": "cd server && npm run dev",
+    "dev": "concurrently \"npm run dev:fe\" \"npm run dev:srv \"",
+    "build": "cd fe && npm run build",
+    "start": "npm run build && cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nojram00/shortie.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nojram00/shortie/issues"
+  },
+  "homepage": "https://github.com/nojram00/shortie#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

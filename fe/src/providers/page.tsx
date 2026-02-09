@@ -2,10 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext, useEffect, useState } from "react";
 import useMeta from "../hooks/metadata";
+import { url } from "../environment";
 
-const devmode = import.meta.env.MODE == 'development';
-
-const url = devmode ? 'http://localhost:3001' : location.origin;
 // const url = location.origin;
 
 interface Page {
@@ -24,7 +22,9 @@ export function PageContextProvider({ path, children } : { path: string; childre
     const meta = useMeta();
 
     useEffect(() => {
-        const api_route = `${url}/api/${path.split('/').filter(p => p !== '').join('/')}`;
+        const updatedPath = path.split('/').filter(p => p !== '').join('/');
+        if(updatedPath.startsWith(":")) return;
+        const api_route = `${url}/api/${updatedPath}`;
             fetch(api_route).then(async res => (
                 {
                     data: await res.json(),
