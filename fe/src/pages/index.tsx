@@ -1,13 +1,30 @@
+import { useEffect, useState } from "react";
 import useShortener from "../hooks/useShortener";
+import Toast from "../components/toast";
 
 export default function HomePage() {
-  const { link, setLink, shorten, shortenLink } = useShortener();
+  const { link, setLink, shorten, shortenLink, copyLink, pubsub } = useShortener();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if(!pubsub) return;
+    const cb = pubsub.subscribe(() => {
+      setShow(true);
+    });
+
+    return () => cb();
+  }, [pubsub]);
 
   return (
     <div
       data-theme="cupcake"
       className="min-h-screen bg-base-100 text-base-content"
     >
+      <Toast 
+        show={show}
+        onClose={() => setShow(false)}
+        message="Link Copied"
+      />
       {/* Navbar */}
       <nav className="navbar bg-primary text-primary-content px-6 shadow-md">
         <div className="flex-1">
@@ -55,6 +72,9 @@ export default function HomePage() {
               >
                 {shortenLink}
               </a>
+              <button onClick={copyLink}>
+                Copy Link
+              </button>
             </div>
           )}
         </div>
