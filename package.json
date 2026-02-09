@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:fe": "cd fe && npm install",
     "install:srv": "cd server && npm install",
-    "install:all": "concurrently \"npm run install:fe\" \"npm run install:srv\" \" npm install\"",
+    "install:all": "npm install && concurrently \"npm run install:fe\" \"npm run install:srv\"",
     "dev:fe": "cd fe && npm run dev",
     "dev:srv": "cd server && npm run dev",
     "dev": "concurrently \"npm run dev:fe\" \"npm run dev:srv \"",
