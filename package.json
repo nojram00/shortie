@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:fe": "cd fe && npm install",
-    "install:srv" : "cd server && npm install",
-    "install:all": "concurrently \"npm run install:fe\" \"npm run install:srv\"",
+    "install:srv": "cd server && npm install",
+    "install:all": "concurrently \"npm run install:fe\" \"npm run install:srv\" \" npm install\"",
     "dev:fe": "cd fe && npm run dev",
     "dev:srv": "cd server && npm run dev",
     "dev": "concurrently \"npm run dev:fe\" \"npm run dev:srv \"",
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/nojram00/shortie#readme",
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "dotenv": "^17.2.4"
   }
 }
