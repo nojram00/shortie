@@ -24,17 +24,6 @@ app.use("/api", ...apiRoutes);
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.get("/robots.txt", (req, res) => {
-  res.type("text/plain");
-  res.send(`
-User-agent: *
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-`);
-});
-
 app.use((req, res) => {
   if (req.path.startsWith("/api")) {
     return res.status(404).end();
