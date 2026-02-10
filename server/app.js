@@ -1,35 +1,47 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const initializeDb = require('./utils/database');
-const path = require('path');
-const apiRoutes = require('./api');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const initializeDb = require("./utils/database");
+const path = require("path");
+const apiRoutes = require("./api");
 
 const app = express();
 initializeDb();
 
-app.use(cors({
+app.use(
+  cors({
     origin: [
-        'http://127.0.0.1:5173',
-        'http://localhost:5173',
-        'http://0.0.0.0:5173'
-    ]
-}));
+      "http://127.0.0.1:5173",
+      "http://localhost:5173",
+      "http://0.0.0.0:5173",
+    ],
+  }),
+);
 
 app.use(express.json());
 
-app.use('/api', ...apiRoutes);
+app.use("/api", ...apiRoutes);
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.use((req, res) => {
-    if(req.path.startsWith('/api')) {
-        return res.status(404).end();
-    }
-    res.sendFile(path.join(__dirname, "build", "index.html"))
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain");
+  res.send(`
+User-agent: *
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+`);
 });
 
+app.use((req, res) => {
+  if (req.path.startsWith("/api")) {
+    return res.status(404).end();
+  }
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.listen(3001, () => {
-    console.log('running');
-})
+  console.log("running");
+});
